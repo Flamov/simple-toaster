@@ -1,7 +1,5 @@
 /********** TOASTS **********/
 
-var toastArray = new Array();
-
 function toastAdd (data) {
 
 	// This is used to initialise the toasts
@@ -17,6 +15,9 @@ function toastAdd (data) {
 
 		// Create the toast timeout variable
 		toastTimeout = null;
+
+		// Create the toast array
+		toastArray = new Array();
 
 	};
 
@@ -76,7 +77,11 @@ function toastRemove (target) {
 function toastClear () {
 
 	for (var i = 0; i < toastArray.length; i++) {
-		toastRemove(toastCache.children[i]);
+		toastArray[i].classList.remove("visible");
+		setTimeout(function () {
+			toastArray.splice(0, toastArray.length);
+			toastCache.innerHTML = "";
+		}, 500);
 	};
 
 };
