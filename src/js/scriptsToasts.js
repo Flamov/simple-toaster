@@ -25,18 +25,13 @@ function toastAdd (data) {
 	//toastElement.onclick = toastRemove(this);
 	toastElement.setAttribute("onclick", "toastRemove(this)");
 
-	// Create the wrapper for the text
-	var toastElementWrapper = document.createElement("div");
-	toastElementWrapper.classList.add("wrapper");
-	toastElement.appendChild(toastElementWrapper);
-
 	// TODO: Convert following two conditionals to catch/match for simplicity
 
 	function createTextElement (targetClass, targetText) {
 		var toastElementText = document.createElement("span");
 		toastElementText.classList.add(targetClass);
 		toastElementText.innerHTML = targetText;
-		toastElementWrapper.appendChild(toastElementText);
+		toastElement.appendChild(toastElementText);
 	};
 
 	// Check if the title property has been passed; if so, add title element
