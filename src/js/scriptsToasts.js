@@ -79,7 +79,7 @@ function toastClear () {
 	for (var i = 0; i < toastArray.length; i++) {
 		toastArray[i].classList.remove("visible");
 		setTimeout(function () {
-			toastArray.splice(0, toastArray.length);
+			toastArray = [];
 			toastCache.innerHTML = "";
 		}, 500);
 	};
