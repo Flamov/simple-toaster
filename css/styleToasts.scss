@@ -1,0 +1,123 @@
+@import "_sass/vars";
+
+@mixin boxSizing ($value) {
+	-webkit-box-sizing: $value;
+	-moz-box-sizing: $value;
+	-ms-box-sizing: $value;
+	box-sizing: $value; }
+
+@mixin boxShadow ($shadow) {
+	-webkit-box-shadow: $shadow;
+	-moz-box-shadow: $shadow;
+	box-shadow: $shadow; }
+
+@mixin alignVerticalLeft {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start; }
+
+@mixin transition ($transition) {
+	-webkit-transition: $transition;
+	-moz-transition: $transition;
+	-ms-transition: $transition;
+	-o-transition: $transition;
+	transition: $transition; }
+
+@mixin calc ($property, $expression) {
+	#{$property}: -webkit-calc(#{$expression});
+	#{$property}: -moz-calc(#{$expression});
+	#{$property}: -ms-calc(#{$expression});
+	#{$property}: -o-calc(#{$expression});
+	#{$property}: calc(#{$expression}); }
+
+@mixin transform ($values) {
+	-webkit-transform: $values;
+	-moz-transform: $values;
+	-ms-transform: $values;
+	-o-transform: $values;
+	transform: $values; }
+
+
+
+#toats,
+#toats * {
+	@include boxSizing(border-box); }
+
+#toasts {
+	z-index: 200;
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	width: 0;
+	height: 0;
+	font-family: "Roboto", Helvetica, Arial, Verdana, sans-serif;
+	overflow: visible; }
+
+#toasts .toast {
+	opacity: 0;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	padding: 20px;
+	min-width: 150px;
+	max-width: 450px;
+	color: #FFFFFF;
+	border-radius: 5px;
+	overflow: hidden;
+	@include boxShadow(0 0 5px 2px rgba(0, 0, 0, .15));
+	@include alignVerticalLeft;
+	@include transform (translateX(230px));
+	@include transition (all .5s cubic-bezier(0.190, 1.000, 0.220, 1.000)); }
+
+#toasts .toast.visible {
+	opacity: 1;
+	@include transform (translateX(0)); }
+
+#toasts .toast .wrapper {
+	@include calc (width, "100% - 40px"); }
+
+#toasts .toast.visible:hover {
+	cursor: pointer;
+	opacity: .75;
+	@include transform (translateX(10px)); }
+
+#toasts .toast:before {
+	content: "";
+	margin-right: 20px;
+	width: 20px;
+	height: 15px;
+	background: url("../img/toastIcons.svg") no-repeat transparent; }
+
+#toasts .toast.success {
+	background: $color-green; }
+
+#toasts .toast.success:before {
+	background-position: 0 0; }
+
+#toasts .toast.caution {
+	background: $color-yellow; }
+
+#toasts .toast.caution:before {
+	background-position: 0 -15px; }
+
+#toasts .toast.error {
+	background: $color-red; }
+
+#toasts .toast.error:before {
+	background-position: 0 -30px; }
+
+#toasts .toast .title,
+#toasts .toast .subtitle {
+	display: block;
+	white-space: nowrap; }
+
+#toasts .toast .title {
+	font-size: 16px;
+	font-weight: 500; }
+
+#toasts .toast .subtitle {
+	font-size: 14px;
+	text-align: justify; }
+
+#toasts .toast .title + .subtitle {
+	margin-top: 10px; }
