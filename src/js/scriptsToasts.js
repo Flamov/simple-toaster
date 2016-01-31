@@ -67,7 +67,7 @@ function toastRemove (target) {
 	}, 500);
 
 	setTimeout(function () {
-		toastReorder(0);
+		toastReorder(targetIndex);
 	}, 50);
 
 	clearTimeout(toastTimeout);
@@ -88,15 +88,17 @@ function toastClear () {
 
 function toastReorder (target) {
 
-	var heights = 0;
-
 	for (var i = target; i < toastArray.length; i++) {
 
-		if (i > 0) {
-			heights = heights - parseInt(toastArray[i - 1].offsetHeight) - 20;
+		if (i == 0) {
+			var targetOffset = 0;
+		}
+		else {
+			var targetOffset = parseInt(toastArray[i - 1].dataset.toastOffset) - parseInt(toastArray[i - 1].offsetHeight) - 20;
 		};
 
-		toastArray[i].style = "-webkit-transform: translateY(" + heights + "px); -moz-transform: translateY(" + heights + "px); -ms-transform: translateY(" + heights + "px); -o-transform: translateY(" + heights + "px); transform: translateY(" + heights + "px)";
+		toastArray[i].style = "-webkit-transform: translateY(" + targetOffset + "px); -moz-transform: translateY(" + targetOffset + "px); -ms-transform: translateY(" + targetOffset + "px); -o-transform: translateY(" + targetOffset + "px); transform: translateY(" + targetOffset + "px)";
+		toastArray[i].dataset.toastOffset = targetOffset;
 
 	};
 
