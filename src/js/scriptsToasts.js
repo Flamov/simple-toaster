@@ -60,7 +60,7 @@ function toastRemove (target) {
 
 	var targetIndex = toastArray.indexOf(target);
 	toastArray.splice(targetIndex, 1);
-	target.classList.remove("visible");
+	target.classList.add("remove");
 
 	setTimeout(function () {
 		target.remove();
