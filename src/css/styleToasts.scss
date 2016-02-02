@@ -85,13 +85,13 @@
 	background: $color-yellow; }
 
 #toasts .toast.caution:before {
-	background-position: 0 -15px; }
+	background-position: 0 -20px; }
 
 #toasts .toast.error {
 	background: $color-red; }
 
 #toasts .toast.error:before {
-	background-position: 0 -30px; }
+	background-position: 0 -40px; }
 
 #toasts .toast .title {
 	font-size: 16px;
