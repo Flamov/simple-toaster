@@ -10,17 +10,33 @@
 		
 		<script type="text/javascript">
 
-			var toastData1 = {type: "success", title: "You have saved the world!", subtitle: "Nice one!"};
+			var toastData1 = {
+				type: "success",
+				content: {
+					title: "You have saved the world!",
+					subtitle: "Nice one!"
+				}
+			};
+
 			toastAdd(toastData1);
 
-			var toastData2 = {type: "caution", title: "Mind the gap"};
+			var toastData2 = {
+				type: "error",
+				content: {
+					title: "Are you sure you want to delete 5 rows?"
+				},
+				option: {
+					callback: "testFunction(true)",
+					confirm: "Delete Rows",
+					close: "Cancel"
+				}
+			};
+
 			toastAdd(toastData2);
 
-			var toastData3 = {type: "error", subtitle: "Could not compute"};
-			toastAdd(toastData3);
-
-			var toastData4 = {type: "success", subtitle: "Glorious!"};
-			toastAdd(toastData4);
+			function testFunction (target) {
+				console.log("successful: " + target);
+			};
 
 		</script>
 

@@ -24,7 +24,6 @@ function toastAdd (data) {
 	var toastElement = document.createElement("div");
 	toastElement.className = "toast " + data.type;
 	//toastElement.onclick = toastRemove(this);
-	toastElement.setAttribute("onclick", "toastRemove(this)");
 
 	// TODO: Convert following two conditionals to catch/match for simplicity
 
@@ -36,13 +35,37 @@ function toastAdd (data) {
 	};
 
 	// Check if the title property has been passed; if so, add title element
-	if (data.hasOwnProperty("title") !== false) {
-		createTextElement("title", data.title);
+	if (data.content.hasOwnProperty("title") !== false) {
+		createTextElement("title", data.content.title);
 	};
 
 	// Check if the subtitle property has been passed; if so, add subtitle element
-	if (data.hasOwnProperty("subtitle") !== false) {
-		createTextElement("subtitle", data.subtitle);
+	if (data.content.hasOwnProperty("subtitle") !== false) {
+		createTextElement("subtitle", data.content.subtitle);
+	};
+
+	// Check if the callbacks have been defined; if so, add the buttons and callbacks
+	if (data.hasOwnProperty("option") !== false) {
+		var toastElementList = document.createElement("ul");
+
+		var toastElementConfirm = document.createElement("li");
+		toastElementConfirm.innerHTML = data.option.confirm;
+		toastElementConfirm.setAttribute("onclick", data.option.callback);
+
+		var toastElementClose = document.createElement("li");
+		toastElementClose.innerHTML = data.option.close;
+		toastElementClose.setAttribute("onclick", "toastRemove(this.parentNode.parentNode)");
+
+		var toastElementList = document.createElement("ul");
+
+		toastElementList.appendChild(toastElementConfirm);
+		toastElementList.appendChild(toastElementClose);
+		toastElement.appendChild(toastElementList);
+		toastElement.classList.add("option");
+	}
+	else {
+		toastElement.setAttribute("onclick", "toastRemove(this)");
+		toastElement.classList.add("message");
 	};
 
 	toastCache.appendChild(toastElement);
